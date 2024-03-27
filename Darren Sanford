@@ -1,0 +1,20 @@
+CONVERTING A NON STANDARD DATE OF DAY MONTH YEAR TO MONTH DAY YEAR		
+In the event the date is entered as DAY MONTH YEAR Excel does not recognize this format	
+The date has to be converted by using TEXTSPLIT and INDEX	
+ 		
+=INDEX(TEXTSPLIT(B2,”/”),1,1) - Returns the "13"		
+=INDEX(TEXTSPLIT(B2,”/”),1,2) - Returns the "02"		
+=INDEX(TEXTSPLIT(B2,”/”),1,3) - Returns the "2020"		
+		
+To get the correct format the DAY(YEAR,DAY,MONTH) must be applied		
+		
+=DATE(YEAR(B2),DAY(B2),MONTH(B2))		
+		
+Combine the two formulas		
+=IF(ISTEXT(B2),DATE(INDEX(TEXTSPLIT(B2,"/"),1,3),INDEX(TEXTSPLIT(B2,"/"),1,2),INDEX(TEXTSPLIT(B2,"/"),1,1)),DATE(YEAR(B2),DAY(B2),MONTH(B2)))		
+		
+Converts 13/02/2024 to 3/13/2024		
+		
+		
+Reference		
+https://howtoexcel.net/2023/03/how-to-convert-date-formats-in-excel.html		
